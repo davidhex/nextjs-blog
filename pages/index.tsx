@@ -3,6 +3,8 @@ import Layout, {siteTitle} from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import {getSortedPostsData} from "../lib/posts";
 import {ReactNode} from "react";
+import Link from 'next/link';
+import Date from '../components/date';
 
 // 两种参数写法
 // export default function Home(props:any) {
@@ -25,15 +27,17 @@ export default function Home({allPostsData}: { allPostsData: any[] }) {
             <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
                 <h2 className={utilStyles.headingLg}>Blog</h2>
                 <ul className={utilStyles.list}>
-
                     {/*{props.allPostsData.map(({id, date, title}: any) => (*/}
                     {allPostsData.map(({id, date, title}: any) => (
+
                         <li className={utilStyles.listItem} key={id}>
-                            {title}
-                            <br/>
-                            {id}
-                            <br/>
-                            {date}
+
+                            <Link href={`/posts/${id}`} > {title}</Link>
+
+                            <span> </span>
+                             <small className={utilStyles.lightText}>
+                                 <Date dateString={date}/>
+                            </small>
                         </li>
                     ))}
                 </ul>
